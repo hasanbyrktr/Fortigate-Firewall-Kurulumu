@@ -1,5 +1,6 @@
 FORTIGATE® Firewall Kurulumu
 
+![FortiGate Firewall](/1.webp)
 
 Firewall (Güvenlik Duvarı) Nedir?
 Firewall’lar, iç ve dış ağ trafiğini denetlemeyi ve kontrol altına almayı sağlayan cihazlardır. Bu cihazlar sayesinde yerel makinemizden izinsiz olarak dış ağlara veri alışverişi yapılması engellenir. Yani bilgisayarımızdan dış internete açılan ağda kısıtlamalar, kontroller ve kurallar belirleyerek, yalnızca bu kurallara uygun bağlantılara izin verirler.
@@ -30,19 +31,22 @@ Erdinç Tandoğan hocam aracılığıyla eriştiğim süre sınırlı lisans ile
 Cihazı ilk açtığımızda bizi FortiGate’in Status penceresi karşılar.
 İlk önce cihazımıızı internete çıkarırken static route oluşturmalıyız.
 
-
+![FortiGate Firewall](/2.webp)
+![FortiGate Firewall](/3.webp)
 
 Static route kısmına gelip new dedikten sonra 0.0.0.0/0.0.0.0 yazıyoruz
 Buradaki Gateway address internete çıkış cihazımız olan modemimizin IP adresidir. Gateway IP’nizi öğrenmek için işletim sisteminize göre değişerek Windows için cmd ekranında “ipconfig” komutuyla öğrenebilirsiniz.
 
 FortiGate ve diğer cihazlarda da olmak üzere 0.0.0.0/0.0.0.0 internete erişim demektir. 0.0.0.0/0.0.0.0, ağ yönetiminde “herhangi bir IP” anlamına gelir ve tüm internet trafiğini kapsar. FortiGate gibi güvenlik cihazlarında, bu adres genellikle internete erişim sağlamak için kullanılır. Bu ayar, dışa açık trafik için tüm IP adreslerine izin vererek cihazın internete erişmesini sağlar. Özellikle yönlendirme ve güvenlik duvarı kuralları ile yapılandırıldığında, 0.0.0.0/0.0.0.0, internet bağlantısı için temel bir yapı taşını oluşturur.
 
+![FortiGate Firewall](/4.webp)
 
 Interfaces menüsüne gelip new diyerek yeni bir Interface oluşturuyoruz
 Interfaces menüsüne gelip new diyerek yeni bir Interface oluşturuyoruz. Ben bu Interface’i IT birimim kullansın istiyorum ve IT birimimin girişni bu port üzerinden yapacağım. Role kısmını LAN olarak seçiyorum. IP/Netmask olarak 192.168.10.2/255.255.255.0 ayarlıyorum IT Birimimden internete bağlanan kullanıcılara 192.168.10.x şeklinde DHCP protokülünün 2 den 254e kadar IP dağıtması için address range kısmını görseldeki gibi dolduruyorum. Bağlanan ilk cihazımız 192.168.10.2 den başlayarak sırayla IP alır.
 
 Şimdi bu IT birimimizi internete çıkarmak için gerekli policyleri (kuralları) yazmamız gerekiyor.
 
+![FortiGate Firewall](/5.webp)
 
 Biraz karışık gelmiş olabilir tane tane açıklayacağım:
 
@@ -72,6 +76,8 @@ DNS Filtresi: DNS sorgularını filtreleyerek zararlı alan adlarına erişimi e
 Uygulama Kontrolü: Belirli uygulamaları tanıyıp kontrolünü sağlar (örn. Facebook, YouTube).
 IPS (Saldırı Önleme Sistemi): Bilinen ağ saldırılarını tanıyıp engeller.
 SSL İnceleme: Şifreli SSL/TLS trafiğini inceler. “certificate-inspection” modu sertifikaları doğrular ancak içeriği incelemez.
+
+![FortiGate Firewall](/6.webp)
 
 Ben görseldeki gibi default(varsayılan) profilleri aktif ettim ve kuralı kaydettim. Bundan sonraki işlemde bir sanal makine kullanarak ya da kendi bilgisayarınızı kullanıp belirlediğimiz kurallarla firewall üzerinden internete çıkış yapabilirsiniz.
 
